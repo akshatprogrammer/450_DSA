@@ -28,15 +28,15 @@ void insert(node* &head,int val){
     }
 }*/
 bool detectloop(node* head){
-    node* prev=head;
-    node* nextptr=head;
+    node* slow=head;
+    node* fast=head;
     if(head==NULL)
         return false;
-    while(nextptr!=NULL && nextptr->next!=NULL){
-        nextptr=nextptr->next->next;
-        prev=prev->next;
+    while(fast!=NULL && fast->next!=NULL){
+        fast=fast->next->next;
+        slow=slow->next;
 
-        if(prev==nextptr)
+        if(fast==slow)
             return true;
     }
     return false;
@@ -44,7 +44,7 @@ bool detectloop(node* head){
 }
 int main(){
     node* head=NULL;
-    int n,ele,x;
+    int n,ele;
     cin >> n;
     for(int i=0;i<n;i++){
         cin >> ele;
