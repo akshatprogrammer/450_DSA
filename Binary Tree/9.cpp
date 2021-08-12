@@ -1,6 +1,5 @@
 #include<iostream>
 #include<queue>
-#include<stack>
 using namespace std;
 class node{
 public:
@@ -16,9 +15,21 @@ public:
 };
 void LeftViewOfTree(node* root){
 	if(root==NULL) return;
-	cout << root->data << " ";
-	LeftViewOfTree(root->left);
-//	cout << root->data << " ";
+	queue<node*> q;
+	q.push(root);
+	while(!q.empty()){
+		int n=q.size();
+		for(int i=1;i<n+1;i++){
+			node* curr=q.front();
+			q.pop();
+			if(i==1)
+				cout << curr->data << " ";
+			if(curr->left!=NULL)
+				 q.push(curr->left);
+			if(curr->right!=NULL) 
+				q.push(curr->right);
+		}
+	}
 }
 int main(){
 	node* root=new node(1);
